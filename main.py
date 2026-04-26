@@ -13,9 +13,9 @@ from datamodules.earlywarning import returnFrame as earlywarning
 from datamodules.downtime import returnFrame as downtime
 from datamodules.datacards import returnActiveMachines as activemachines,returnTemperature,highPowerConsumption,highErrorRate,highPacketLoss,highProduction
 
-stl.set_page_config(layout="wide",page_title="Predictive Maintenance and Anomaly Detection",page_icon="📉")
+stl.set_page_config(layout="wide",page_title="Predictive Maintenance and Anomaly Detection in 6G integrated systems",page_icon="📉")
 
-stl.markdown("<h2 style='text-align: center;text-transform: uppercase'>📉 Predictive Maintenance and Anomaly Detection</h2><hr />",unsafe_allow_html=True)
+stl.markdown("<h3 style='text-align: center;text-transform: uppercase'>📉 Predictive Maintenance and Anomaly Detection in <ins>6G integrated systems</ins></h3><hr />",unsafe_allow_html=True)
 
 collection = MongoConnectDriver().connect()
 
