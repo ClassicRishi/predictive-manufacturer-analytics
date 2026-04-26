@@ -15,7 +15,7 @@ from datamodules.datacards import returnActiveMachines as activemachines,returnT
 
 stl.set_page_config(layout="wide",page_title="Predictive Maintenance and Anomaly Detection",page_icon="📉")
 
-stl.markdown("<h3 style='text-align: center;text-transform: uppercase'>📉 Predictive Maintenance and Anomaly Detection on <ins>6G integrated smart manufacturing systems</ins></h3><hr />",unsafe_allow_html=True)
+stl.markdown("<h3 style='text-align: center;'>📉 Predictive Maintenance and Anomaly Detection on <ins>6G INTEGRATED SMART MANUFACTURING SYSTEMS</ins></h3><hr />",unsafe_allow_html=True)
 
 collection = MongoConnectDriver().connect()
 
