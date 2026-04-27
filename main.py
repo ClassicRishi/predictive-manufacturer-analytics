@@ -2,6 +2,7 @@ import streamlit as stl
 import numpy as np
 import pandas as pd
 import plotly.express as px
+import plotly.graph_objects as go
 from connection.Connect import MongoConnectDriver
 from datamodules.powerconsumption import returnFrame as pc
 from datamodules.temperature import returnFrame as temperature
@@ -12,6 +13,7 @@ from datamodules.productionspeed import returnFrame as production
 from datamodules.earlywarning import returnFrame as earlywarning
 from datamodules.downtime import returnFrame as downtime
 from datamodules.datacards import returnActiveMachines as activemachines,returnTemperature,highPowerConsumption,highErrorRate,highPacketLoss,highProduction
+from datamodules.highrisk import returnFrame as highrisk
 
 stl.set_page_config(layout="wide",page_title="Predictive Maintenance and Anomaly Detection in 6G integrated systems",page_icon="📉")
 
@@ -213,3 +215,35 @@ with col12:
         stl.metric(label="Maintenance_Score",value=round(top_maintenance.iloc[i]['Predictive_Maintenance_Score'],6),delta=str(top_maintenance.iloc[i]['Predictive_Maintenance_Score']-top_maintenance.iloc[i+1]['Predictive_Maintenance_Score']))
 
 stl.markdown("<hr />",unsafe_allow_html=True)
+
+highriskdata = highrisk(collection,slidercol[0],slidercol[1])
+stl.markdown("<h3 style='text-align: center'> High Risk Machines</h3>",unsafe_allow_html=True)
+
+fig1 = go.Figure()
+fig2 = px.line(
+    x=highriskdata['Machine_ID'],
+    y=highriskdata['Error_Rate_%'],
+    markers=True
+)
+
+fig1.add_trace(go.Bar(
+    x=highriskdata['Machine_ID'],
+    y=highriskdata['Power_Consumption_kW'],
+    name="Power_Consumption_kW"
+))
+
+fig1.update_layout(dict(
+    yaxis_range=[highriskdata['Power_Consumption_kW'].min(),highriskdata['Power_Consumption_kW'].max()],
+    xaxis_title="Machine_ID",
+    yaxis_title="Power_Consumption_kW"
+))
+
+fig2.update_layout(dict(
+    xaxis_title="Machine_ID",
+    yaxis_title="Error_Rate_%",
+))
+
+fig2.update_traces(marker=dict(size=12))
+
+stl.plotly_chart(fig1)
+stl.plotly_chart(fig2)
