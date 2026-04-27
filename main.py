@@ -1,6 +1,7 @@
 import streamlit as stl
 import numpy as np
 import pandas as pd
+import plotly.io as pio
 import plotly.express as px
 import plotly.graph_objects as go
 from connection.Connect import MongoConnectDriver
@@ -204,7 +205,7 @@ with col11:
     }).reset_index()
     df['Leadtime'] = leadtimedata['Leadtime']
     downtimeindex = df
-    fig = px.bar(df,x='Machine_ID',y="Leadtime",color="Predictive_Maintenance_Score")
+    fig = px.bar(df,x='Machine_ID',y="Leadtime",color="Predictive_Maintenance_Score",title="Downtime Analysis",color_continuous_scale=px.colors.sequential.Viridis)
     stl.plotly_chart(fig)
 
 with col12:
